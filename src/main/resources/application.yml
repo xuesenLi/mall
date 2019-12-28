@@ -11,7 +11,10 @@ spring:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+    #控制台日志配置  打印sql
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:mappers/*.xml
+
 #\u4FEE\u6539\u65E5\u5FD7
 logging:
   pattern:
