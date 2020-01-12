@@ -3,7 +3,6 @@ package com.lxs.mall.service.impl;
 import com.lxs.mall.dao.UserMapper;
 import com.lxs.mall.enums.ResponseEnum;
 import com.lxs.mall.enums.RoleEnum;
-import com.lxs.mall.exception.GlobalException;
 import com.lxs.mall.pojo.User;
 import com.lxs.mall.service.UserService;
 import com.lxs.mall.vo.ResponseVo;

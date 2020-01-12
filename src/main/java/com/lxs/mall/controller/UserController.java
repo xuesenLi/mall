@@ -1,7 +1,6 @@
 package com.lxs.mall.controller;
 
 import com.lxs.mall.consts.MallConst;
-import com.lxs.mall.dao.UserMapper;
 import com.lxs.mall.enums.ResponseEnum;
 import com.lxs.mall.form.UserLoginForm;
 import com.lxs.mall.form.UserRegisterForm;
@@ -68,16 +67,33 @@ public class UserController {
         ResponseVo<User> userResponseVo = userService.login(userLoginForm.getUsername(), userLoginForm.getPassword());
         //设置session
         session.setAttribute(MallConst.CURRENT_USER, userResponseVo.getData());
+        log.info("/login sessionID = {}", session.getId());
         return userResponseVo;
     }
 
+    /**
+     * 在session中获取登录状态
+     * @param session
+     * @return
+     */
+    //session保存在内存中， 容易丢失，  所以放在 redis中 ： token + redis 方式
     @GetMapping("/user")
     public ResponseVo<User> userInfo(HttpSession session){
+        log.info("/user sessionID = {}", session.getId());
         User user = (User) session.getAttribute(MallConst.CURRENT_USER);
-        if(user == null){
-            return ResponseVo.error(ResponseEnum.NEED_LOGIN);
-        }
 
+        return ResponseVo.success(user);
+    }
+
+    //TODO 判断登录状态， 拦截器
+    // {@link UserLoginInterceptor}
+    @PostMapping("/user/logout")
+    public ResponseVo logout(HttpSession session){
+        log.info("/logout sessionID = {}", session.getId());
+        User user = (User) session.getAttribute(MallConst.CURRENT_USER);
+
+        //删除session
+        session.removeAttribute(MallConst.CURRENT_USER);
         return ResponseVo.success(user);
     }
 

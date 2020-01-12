@@ -19,3 +19,9 @@ mybatis:
 logging:
   pattern:
     console: "[%thread] %-5level %logger{36} - %msg%n"
+
+## 设置session 过期时间 单位 S 不能低于 1min
+#server:
+#  servlet:
+#    session:
+#      timeout:

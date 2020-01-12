@@ -19,4 +19,10 @@ public class GlobalExceptionHandler {
     public ResponseVo GlobalException(GlobalException e){
         return ResponseVo.error(ResponseEnum.ERROR, e.getMsg());
     }
+
+    @ExceptionHandler(UserLoginException.class)
+    public ResponseVo UserLoginException(){
+        return ResponseVo.error(ResponseEnum.NEED_LOGIN);
+
+    }
 }
