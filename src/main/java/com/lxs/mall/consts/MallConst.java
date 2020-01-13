@@ -7,4 +7,9 @@ package com.lxs.mall.consts;
  */
 public class MallConst {
     public static final String CURRENT_USER = "currentUser";
+
+    //类目表中 一级目录
+    public static final Integer ROOT_PARENT_ID = 0;
+
+
 }

@@ -3,8 +3,6 @@ package com.lxs.mall.form;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 /**
  * @author Mr.Li
