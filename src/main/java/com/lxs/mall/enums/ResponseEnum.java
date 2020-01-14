@@ -24,13 +24,13 @@ public enum ResponseEnum {
 
     PRODUCT_STOCK_ERROR(14, "库存不足"),
 
-    CART_PRODUCT_NOT_EXIST(15, "购物车中商品不存在"),
+    CART_PRODUCT_NOT_EXIST(15, "购物车中此商品商品不存在"),
 
+    DELETE_SHIPPING_FAIL(16, "删除收货地址失败"),
 
+    SHIPPING_NOT_EXIST(17, "收货地址不存在"),
 
-
-
-
+    CART_SELECT_IS_EMPTY(15, "购物车中没有选中的商品"),
 
     ;
 

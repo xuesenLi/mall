@@ -226,7 +226,7 @@ public class CartServiceImpl implements CartService {
      * @param uid
      * @return
      */
-    private List<Cart> listForCart(Integer uid){
+    public List<Cart> listForCart(Integer uid){
         HashOperations<String, String, String> opsForHash = redisTemplate.opsForHash();
         String redisKey = String.format(CART_REDIS_KEY_TEMPLATE, uid);
 

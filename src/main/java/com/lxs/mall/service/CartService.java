@@ -2,8 +2,11 @@ package com.lxs.mall.service;
 
 import com.lxs.mall.form.CartAddForm;
 import com.lxs.mall.form.CartUpdateForm;
+import com.lxs.mall.pojo.Cart;
 import com.lxs.mall.vo.CartVo;
 import com.lxs.mall.vo.ResponseVo;
+
+import java.util.List;
 
 /**
  * @author Mr.Li
@@ -60,6 +63,14 @@ public interface CartService {
      * @return
      */
     ResponseVo<Integer> sum(Integer uid);
+
+
+    /**
+     * 获取redis中数据  遍历
+     * @param uid
+     * @return
+     */
+    List<Cart> listForCart(Integer uid);
 
 
 }

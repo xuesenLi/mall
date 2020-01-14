@@ -189,4 +189,19 @@
     </if>
   </select>
 
+  <select id="selectByProductIdSet" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from mall_product
+    <where>
+      <if test="productIdSet != null">
+        id in
+        <foreach collection="productIdSet" item="item" index="index" open="(" separator="," close=")">
+          #{item}
+        </foreach>
+      </if>
+    </where>
+  </select>
+
+
 </mapper>

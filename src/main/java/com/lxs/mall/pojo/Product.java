@@ -25,6 +25,7 @@ public class Product {
 
     private Integer stock;
 
+    //商品状态.1-在售 2-下架 3-删除
     private Integer status;
 
     private Date createTime;
