@@ -18,6 +18,20 @@ public enum ResponseEnum {
     NEED_LOGIN(10, "用户未登录"),
     USERNAME_OR_PASSWORD_ERROR(11, "用户名或则密码错误"),
 
+    PRODUCT_OFF_SALE_OR_DELETE(12, "商品下架或者删除"),
+
+    PRODUCT_NOT_EXIST(13, "商品不存在"),
+
+    PRODUCT_STOCK_ERROR(14, "库存不足"),
+
+    CART_PRODUCT_NOT_EXIST(15, "购物车中商品不存在"),
+
+
+
+
+
+
+
     ;
 
     private Integer code;

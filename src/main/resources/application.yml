@@ -4,10 +4,13 @@ spring:
     password: 123456
     url: jdbc:mysql://localhost:3306/mall?useSSL=false&serverTimezone=GMT%2B8
     driver-class-name: com.mysql.cj.jdbc.Driver
-    #    \u4E0D\u914D\uFF0C\u9ED8\u8BA4\u4F7F\u7528tomcat\u7684\u6570\u636E\u6E90
-    #type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    database: 0
+    host: 39.96.18.72
+    port: 6379
+    password: lxs
 
-#\u9A7C\u5CF0\u547D\u540D
+
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
@@ -15,7 +18,6 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:mappers/*.xml
 
-#\u4FEE\u6539\u65E5\u5FD7
 logging:
   pattern:
     console: "[%thread] %-5level %logger{36} - %msg%n"
@@ -25,3 +27,4 @@ logging:
 #  servlet:
 #    session:
 #      timeout:
+
