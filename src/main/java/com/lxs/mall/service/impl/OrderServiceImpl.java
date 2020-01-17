@@ -7,6 +7,7 @@ import com.lxs.mall.enums.OrderStatusEnum;
 import com.lxs.mall.enums.PaymentTypeEnum;
 import com.lxs.mall.enums.ProductStatusEnum;
 import com.lxs.mall.enums.ResponseEnum;
+import com.lxs.mall.exception.GlobalException;
 import com.lxs.mall.pojo.*;
 import com.lxs.mall.service.CartService;
 import com.lxs.mall.service.OrderService;
@@ -66,7 +67,7 @@ public class OrderServiceImpl implements OrderService {
         //生成订单编号 orderNo
         Long orderNo = this.generateOrderNum();
         //收获地址校验
-        Shipping shipping = shippingMapper.selectBuUidAndShippingId(uid, shippingId);
+        Shipping shipping = shippingMapper.selectByUidAndShippingId(uid, shippingId);
         if(shipping == null){
             return ResponseVo.error(ResponseEnum.SHIPPING_NOT_EXIST);
         }
@@ -196,7 +197,7 @@ public class OrderServiceImpl implements OrderService {
         pageInfo.setList(orderVoList);
 
         //构建返回对象List<OrderVo>  TODO  另一种实现
-        /*orderList.forEach(order -> {
+/*        orderList.forEach(order -> {
             //
             buildOrderVo(order,
                     orderItemList.stream()
@@ -206,24 +207,79 @@ public class OrderServiceImpl implements OrderService {
                             .filter(e -> e.getId().equals(order.getShippingId()))
                             .collect(Collectors.toList()).get(0)
             );
-        });
-*/
+        });*/
+
         return ResponseVo.success(pageInfo);
     }
 
+    /**
+     * 订单详情
+     * @param uid
+     * @param orderNo
+     * @return
+     */
     @Override
     public ResponseVo<OrderVo> detail(Integer uid, Long orderNo) {
-        return null;
+        Order order = orderMapper.selectByOrderNo(orderNo);
+        if(order == null || !uid.equals(order.getUserId())){
+            return ResponseVo.error(ResponseEnum.ORDER_NOT_EXIST);
+        }
+        List<OrderItem> orderItemList = orderItemMapper.selectByOrderNo(orderNo);
+        Shipping shipping = shippingMapper.selectByPrimaryKey(order.getShippingId());
+
+        //构建OrderVo
+        return ResponseVo.success(buildOrderVo(order, orderItemList, shipping));
     }
 
+    /**
+     * 取消订单 ： 设定只有未付款才能取消
+     * 订单状态:0-已取消-10-未付款，20-已付款，40-已发货，50-交易成功，60-交易关闭
+     *
+     * @param uid
+     * @param orderNo
+     * @return
+     */
     @Override
     public ResponseVo cancel(Integer uid, Long orderNo) {
-        return null;
+        Order order = orderMapper.selectByOrderNo(orderNo);
+        if(order == null || !uid.equals(order.getUserId())){
+            return ResponseVo.error(ResponseEnum.PRODUCT_NOT_EXIST);
+        }
+
+        //设定只有未付款才能取消  根据业务定制
+        if(!OrderStatusEnum.NOT_PAY.getCode().equals(order.getStatus())){
+            return ResponseVo.error(ResponseEnum.ORDER_STATUS_ERROR);
+        }
+
+        order.setStatus(OrderStatusEnum.CANCELED.getCode());
+        order.setCloseTime(new Date());
+        int row = orderMapper.updateByPrimaryKeySelective(order);
+        if(row <= 0){
+            return ResponseVo.error(ResponseEnum.ERROR);
+        }
+        return ResponseVo.success();
     }
 
     @Override
     public void paid(Long orderNo) {
+        Order order = orderMapper.selectByOrderNo(orderNo);
+        if(order == null){
+            throw new GlobalException(ResponseEnum.PRODUCT_NOT_EXIST.getMsg() + "订单ID" + orderNo);
+        }
 
+        //设定只有未付款 订单可以变成未付款
+        if(!OrderStatusEnum.NOT_PAY.getCode().equals(order.getStatus())){
+            throw new GlobalException(ResponseEnum.ORDER_STATUS_ERROR.getMsg() + "订单ID" + orderNo);
+        }
+
+        order.setStatus(OrderStatusEnum.PAID.getCode());
+
+        //支付时间应该从PAY项目支付时 传递过来
+        order.setPaymentTime(new Date());
+        int row = orderMapper.updateByPrimaryKeySelective(order);
+        if(row <= 0){
+            throw new GlobalException("将订单修改为已支付状态失败， 订单ID" + orderNo);
+        }
     }
 
     /**
@@ -293,8 +349,11 @@ public class OrderServiceImpl implements OrderService {
 
         orderVo.setOrderItemVoList(orderItemVoList);
 
-        orderVo.setShippingId(shipping.getId());
-        orderVo.setShippingVo(shipping);
+        //地址有可能会被删除掉
+        if(shipping != null){
+            orderVo.setShippingId(shipping.getId());
+            orderVo.setShippingVo(shipping);
+        }
         return orderVo;
     }
 

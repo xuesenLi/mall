@@ -23,7 +23,7 @@ public interface ShippingMapper {
 
     List<Shipping> selectByUid(Integer uid);
 
-    Shipping selectBuUidAndShippingId(@Param("uid") Integer uid, @Param("shippingId") Integer shipping);
+    Shipping selectByUidAndShippingId(@Param("uid") Integer uid, @Param("shippingId") Integer shipping);
 
     /**
      *  通过ShippingId 返回地址信息

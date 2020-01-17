@@ -11,5 +11,8 @@ public class MallConst {
     //类目表中 一级目录
     public static final Integer ROOT_PARENT_ID = 0;
 
+    //RabbitMQ queue
+    public static final String QUEUE_PAY_NOTIFY = "payNotify";
+
 
 }

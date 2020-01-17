@@ -170,7 +170,7 @@
     where user_id = #{uid,jdbcType=INTEGER}
   </select>
 
-  <select id="selectBuUidAndShippingId" parameterType="map" resultMap="BaseResultMap">
+  <select id="selectByUidAndShippingId" parameterType="map" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from mall_shipping

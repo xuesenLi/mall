@@ -52,6 +52,12 @@
             <optional>true</optional>
         </dependency>
 
+        <!--mq-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
         <!--也可以fastjson-->
 <!--        <dependency>
             <groupId>com.google.code.gson</groupId>

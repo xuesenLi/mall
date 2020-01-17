@@ -204,5 +204,19 @@
     where user_id = #{Uid,jdbcType=INTEGER}
   </select>
 
+  <select id="selectByUidAndOrderNo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from mall_order
+    where user_id = #{Uid,jdbcType=INTEGER}
+    and order_no = #{orderNo,jdbcType=BIGINT},
+  </select>
+
+  <select id="selectByOrderNo" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from mall_order
+    where order_no = #{orderNo,jdbcType=BIGINT}
+  </select>
 
 </mapper>

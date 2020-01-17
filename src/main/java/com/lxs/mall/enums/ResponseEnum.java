@@ -32,6 +32,10 @@ public enum ResponseEnum {
 
     CART_SELECT_IS_EMPTY(15, "购物车中没有选中的商品"),
 
+    ORDER_NOT_EXIST(16, "订单不存在"),
+
+    ORDER_STATUS_ERROR(16, "订单状态有误"),
+
     ;
 
     private Integer code;

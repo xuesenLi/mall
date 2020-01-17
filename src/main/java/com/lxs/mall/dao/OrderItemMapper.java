@@ -34,4 +34,11 @@ public interface OrderItemMapper {
      */
     List<OrderItem> selectByOrderNoSet(@Param("orderNoSet") Set<Long> orderNoSet);
 
+    /**
+     * 通过 orderNo  返回订单子表
+     * @param orderNo
+     * @return
+     */
+    List<OrderItem> selectByOrderNo(@Param("orderNo") Long orderNo);
+
 }
