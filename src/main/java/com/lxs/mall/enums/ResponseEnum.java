@@ -10,7 +10,7 @@ import lombok.Getter;
 public enum ResponseEnum {
 
     ERROR(-1, "服务端错误"),
-    SUCCESS(200, "成功"),
+    SUCCESS(0, "成功"),
     PASSWORD_ERROR(1, "密码错误"),
     USERNAME_EXIST(2, "用户已存在"),
     EMAIL_EXIST(4, "邮箱已存在"),

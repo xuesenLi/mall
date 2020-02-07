@@ -26,7 +26,9 @@ mybatis:
 logging:
   pattern:
     console: "[%thread] %-5level %logger{36} - %msg%n"
-
+  file:
+    max-history: 2
+    max-size: 50MB
 ## 设置session 过期时间 单位 S 不能低于 1min
 #server:
 #  servlet:
