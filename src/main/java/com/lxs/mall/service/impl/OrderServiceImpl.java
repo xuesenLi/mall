@@ -120,7 +120,7 @@ public class OrderServiceImpl implements OrderService {
                 return ResponseVo.error(ResponseEnum.ERROR);
             }
 
-            //更新购物车 （选中的商品) 不能够在这里更新redis购物车 redis不能够回滚
+            //TODO 更新购物车 （选中的商品) 不能够在这里更新redis购物车 redis不能够回滚
 
         }
 
@@ -140,7 +140,7 @@ public class OrderServiceImpl implements OrderService {
         }
 
         //更新购物车 （选中的商品)
-        //Redis有事务(打包命令), 与Mysql的事务不一样，不能回滚  (redis是单线程的）
+        //TODO Redis有事务(打包命令), 与Mysql的事务不一样，不能回滚  (redis是单线程的）
         for (Cart cart : carts) {
              cartService.delete(uid, cart.getProductId());
         }

@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://39.96.18.72:3306/mall?useSSL=false&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    database: 0
+    host: 39.96.18.72
+    port: 6379
+    password: lxs
+  rabbitmq:
+    addresses: 39.96.18.72
+    port: 5672
+    username: guest
+    password: guest
+
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    #控制台日志配置  打印sql
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mappers/*.xml
+
+logging:
+  pattern:
+    console: "[%thread] %-5level %logger{36} - %msg%n"
+
+## 设置session 过期时间 单位 S 不能低于 1min
+#server:
+#  servlet:
+#    session:
+#      timeout:
+server:
+  port: 8081

@@ -11,10 +11,13 @@ import lombok.Data;
 @Data
 public class Cart {
 
+    //商品Id
     private Integer productId;
 
+    //商品数量
     private Integer quantity;
 
+    //商品是否被选中
     private Boolean productSelected;
 
     public Cart(Integer productId, Integer quantity, Boolean productSelected) {
