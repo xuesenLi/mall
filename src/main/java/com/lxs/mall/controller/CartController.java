@@ -24,7 +24,7 @@ public class CartController {
     private CartService cartService;
 
 
-    @GetMapping("/carts/list")
+    @GetMapping("/carts")
     public ResponseVo<CartVo> list(HttpSession session){
         User user = (User) session.getAttribute(MallConst.CURRENT_USER);
 
