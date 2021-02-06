@@ -33,3 +33,22 @@ logging:
 #      timeout:
 server:
   port: 8081
+
+
+#mqtt config
+mqtt:
+  username: admin                   # 用户名
+  password: public                  # 密码
+  url: tcp://123.207.85.44:8090     # 地址
+  completionTimeout: 3000           # 超时时间
+  producer: # 生产者
+    clientId: mqttProducer          # 生产者ID
+    defaultTopic: topic             # 默认发布主题
+  consumer: # 消费者
+    clientId: ${random.value}          # 消费者ID
+    defaultTopic: /edgeAdaptor/register,/edgeAdaptor/register/udpate,/device/+/+/status,/device/+/+/+/data/+/up,/device/+/+/guard/up  #默认定义主题
+
+upload:
+  path:
+    win: D:/upload/
+    linux: /data/file/
